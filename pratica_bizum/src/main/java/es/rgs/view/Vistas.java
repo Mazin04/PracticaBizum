@@ -1,7 +1,8 @@
 package es.rgs.view;
 
 public enum Vistas {
-        VIEW_LOGIN("view/LoginController.fxml");
+        VIEW_LOGIN("view/LoginController.fxml"), 
+        VIEW_REGISTRAR("view/RegisterController.fxml"),;
 
         private final String ruta;
 

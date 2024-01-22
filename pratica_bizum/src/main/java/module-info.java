@@ -1,5 +1,5 @@
 module es.rgs {
-    requires javafx.controls;
+    requires transitive javafx.controls;    
     requires javafx.fxml;
     requires transitive javafx.graphics;
     opens es.rgs to javafx.fxml;

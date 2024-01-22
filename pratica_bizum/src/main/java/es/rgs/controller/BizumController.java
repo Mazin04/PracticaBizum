@@ -19,7 +19,7 @@ public class BizumController extends Application {
     private static final String AVISO_CERRAR = "Estás a punto de cerrar el programa";
     private static final String CERRAR = "Cerrar Aplicación";
     private static final String TITULO = "Bizum by Rubén García";
-    private static final String LOGO = "file:img/bizum.png";
+    public static final String LOGO = "file:img/bizum.png";
     private static Stage currentStage;
 
 
