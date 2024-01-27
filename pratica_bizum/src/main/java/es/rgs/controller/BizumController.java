@@ -1,6 +1,10 @@
 package es.rgs.controller;
 
+import java.sql.SQLException;
+
 import es.rgs.App;
+import es.rgs.model.BancoDAO;
+import es.rgs.model.DAOFactory;
 import es.rgs.view.LoginController;
 import es.rgs.view.ViewController;
 import es.rgs.view.Vistas;
@@ -21,7 +25,11 @@ public class BizumController extends Application {
     private static final String TITULO = "Bizum by Rubén García";
     public static final String LOGO = "file:img/bizum.png";
     private static Stage currentStage;
+    private BancoDAO dao;
 
+    public BizumController() throws SQLException{
+        dao = DAOFactory.getDao(DAOFactory.MODO_MYSQL);
+    }
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -62,5 +70,13 @@ public class BizumController extends Application {
         currentStage.setTitle(TITULO);
         currentStage.show();
         return viewController;
+    }
+
+    public boolean iniciarSesion(String usuario, String contraseña) {
+        return dao.iniciarSesion(usuario, contraseña);
+    }
+
+    public String getNombre(String usuario){
+        return dao.getNombre(usuario);
     }
 }
