@@ -23,7 +23,7 @@ public class BizumController extends Application {
     private static final String AVISO_CERRAR = "Estás a punto de cerrar el programa";
     private static final String CERRAR = "Cerrar Aplicación";
     private static final String TITULO = "Bizum by Rubén García";
-    public static final String LOGO = "file:img/bizum.png";
+    public static final String LOGO = "file:pratica_bizum/src/main/java/es/rgs/img/bizum.png";
     private static Stage currentStage;
     private BancoDAO dao;
 
@@ -78,5 +78,13 @@ public class BizumController extends Application {
 
     public String getNombre(String usuario){
         return dao.getNombre(usuario);
+    }
+
+    public boolean comprobarUsuario(String usuario) {
+        return dao.comprobarUsuario(usuario);
+    }
+
+    public void registrarUsuario(String usuario, String contraseña, String nombre, Integer telefono) {
+        dao.registrarUsuario(usuario, contraseña, nombre, telefono);
     }
 }

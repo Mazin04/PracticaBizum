@@ -13,5 +13,17 @@ public class TestDAO implements BancoDAO {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getUsuario'");
     }
+
+    @Override
+    public boolean comprobarUsuario(String usuario) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'comprobarUsuario'");
+    }
+
+    @Override
+    public void registrarUsuario(String usuario, String contraseña, String nombre, Integer telefono) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'registrarUsuario'");
+    }
     
 }

@@ -80,4 +80,55 @@ public class MySQLBancoDAO implements BancoDAO {
         String bcryptHashString = BCrypt.withDefaults().hashToString(12, contraseña.toCharArray());
         return bcryptHashString;
     }
+
+    @Override
+    public boolean comprobarUsuario(String usuario) {
+        conn = conectar();
+        try {
+            String sql = "SELECT USERNAME FROM USUARIO WHERE USERNAME = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, usuario);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.getSQLState();
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.getSQLState();
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void registrarUsuario(String usuario, String contraseña, String nombre, Integer telefono) {
+        conn = conectar();
+        try {
+            String sql = "INSERT INTO USUARIO VALUES (?, ?, ?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, usuario);
+            ps.setString(2, encriptar(contraseña));
+            ps.setInt(3, telefono);
+            ps.setString(4, nombre);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.getSQLState();
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.getSQLState();
+                e.printStackTrace();
+            }
+        }
+    }
 }
