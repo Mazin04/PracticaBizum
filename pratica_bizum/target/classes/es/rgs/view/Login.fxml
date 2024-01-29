@@ -20,7 +20,7 @@
             <Image url="@../img/wallpaper.png" />
          </image>
       </ImageView>
-      <Label fx:id="lblRegistrate" layoutX="552.0" layoutY="694.0" onMouseClicked="#cambiarRegistro" text="No tienes cuenta? Regístrate">
+      <Label fx:id="lblRegistrate" layoutX="552.0" layoutY="694.0" onMouseClicked="#cambiarRegistro" text="¿No tienes cuenta? Regístrate">
          <font>
             <Font name="Leelawadee UI" size="14.0" />
          </font>

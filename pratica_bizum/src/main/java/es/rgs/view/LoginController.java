@@ -97,7 +97,7 @@ public class LoginController extends ViewController {
                 if (bizumController.iniciarSesion(usuario, contraseña)) {
                     String nombre = bizumController.getNombre(usuario);
                     mostrarAviso("Bienvenido " + nombre, "Bienvenido", AlertType.INFORMATION);
-                    cambiarVentana(Vistas.VIEW_LOGIN);
+                    cambiarVentana(Vistas.VIEW_MENU);
                 } else {
                     mostrarAviso("Usuario o contraseña incorrectos.", "Error", AlertType.ERROR);
                 }
@@ -117,7 +117,7 @@ public class LoginController extends ViewController {
                         Integer numTelefono = Integer.parseInt(telefono);
                         bizumController.registrarUsuario(usuario, contraseña, nombre, numTelefono);
                         mostrarAviso("Usuario registrado correctamente.", "Registro", AlertType.INFORMATION);
-                        cambiarVentana(Vistas.VIEW_LOGIN);
+                        cambiarVentana(Vistas.VIEW_MENU);
                     } catch (Exception e) {
                         mostrarAviso("El teléfono debe ser un número.", "Error", AlertType.ERROR);
                     }
