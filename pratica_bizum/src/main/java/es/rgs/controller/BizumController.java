@@ -135,7 +135,11 @@ public class BizumController extends Application {
         return dao.getDinero(numeroCuenta);
     }
 
-    public void sacarDinero(String usuario, Double dinero) {
-        dao.sacarDinero(usuario, dinero);
+    public void sacarDinero(String numCuenta, Double dinero) {
+        dao.sacarDinero(numCuenta, dinero);
+    }
+
+    public void ingresarDinero(String numeroCuenta, Double dinero) {
+        dao.ingresarDinero(numeroCuenta, dinero);
     }
 }

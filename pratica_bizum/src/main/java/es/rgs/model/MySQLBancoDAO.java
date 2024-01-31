@@ -272,7 +272,28 @@ public class MySQLBancoDAO implements BancoDAO {
             ps.setDouble(1, dinero);
             ps.setBigDecimal(2, new BigDecimal(numCuenta));
             ps.executeUpdate();
+        } catch (SQLException e) {
+            e.getSQLState();
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.getSQLState();
+                e.printStackTrace();
+            }
+        }
+    }
 
+    @Override
+    public void ingresarDinero(String numeroCuenta, Double dinero) {
+        conn = conectar();
+        try {
+            String sql = "UPDATE CUENTAS SET DINERO = DINERO + ? WHERE N_CUENTA = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setDouble(1, dinero);
+            ps.setBigDecimal(2, new BigDecimal(numeroCuenta));
+            ps.executeUpdate();
         } catch (SQLException e) {
             e.getSQLState();
             e.printStackTrace();

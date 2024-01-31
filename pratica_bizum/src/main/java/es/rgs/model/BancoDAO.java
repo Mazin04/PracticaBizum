@@ -12,5 +12,6 @@ public interface BancoDAO {
     public void agregarCuenta(String username, BigInteger numCuenta, Double dinero);
     public boolean comprobarCuenta(BigInteger numCuenta);
     public Double getDinero(String numeroCuenta);
-    public void sacarDinero(String numCuenta, Double dinero);   
+    public void sacarDinero(String numCuenta, Double dinero);
+    public void ingresarDinero(String numeroCuenta, Double dinero);   
 }
