@@ -235,4 +235,54 @@ public class MySQLBancoDAO implements BancoDAO {
         }
         return false;
     }
+
+    @Override
+    public Double getDinero(String numeroCuenta) {
+        conn = conectar();
+        try {
+            String sql = "SELECT DINERO FROM CUENTAS WHERE N_CUENTA = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setBigDecimal(1, new BigDecimal(numeroCuenta));
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getDouble(1);
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            e.getSQLState();
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.getSQLState();
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void sacarDinero(String numCuenta, Double dinero) {
+        conn = conectar();
+        try {
+            String sql = "UPDATE CUENTAS SET DINERO = DINERO - ? WHERE N_CUENTA = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setDouble(1, dinero);
+            ps.setBigDecimal(2, new BigDecimal(numCuenta));
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.getSQLState();
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.getSQLState();
+                e.printStackTrace();
+            }
+        }
+    }
 }

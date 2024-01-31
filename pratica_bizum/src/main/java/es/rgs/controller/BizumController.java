@@ -130,4 +130,12 @@ public class BizumController extends Application {
     public boolean comprobarCuenta(BigInteger numCuenta) {
         return dao.comprobarCuenta(numCuenta);
     }
+
+    public Double getDinero(String numeroCuenta) {
+        return dao.getDinero(numeroCuenta);
+    }
+
+    public void sacarDinero(String usuario, Double dinero) {
+        dao.sacarDinero(usuario, dinero);
+    }
 }

@@ -51,5 +51,17 @@ public class TestDAO implements BancoDAO {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'comprobarCuenta'");
     }
+
+    @Override
+    public Double getDinero(String numeroCuenta) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getDinero'");
+    }
+
+    @Override
+    public void sacarDinero(String numCuenta, Double dinero) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'sacarDinero'");
+    }
     
 }

@@ -10,5 +10,7 @@ public interface BancoDAO {
     public String getTelefono(String usuario);
     public void getCuentas(String usuario);
     public void agregarCuenta(String username, BigInteger numCuenta, Double dinero);
-    public boolean comprobarCuenta(BigInteger numCuenta);   
+    public boolean comprobarCuenta(BigInteger numCuenta);
+    public Double getDinero(String numeroCuenta);
+    public void sacarDinero(String numCuenta, Double dinero);   
 }

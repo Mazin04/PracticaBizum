@@ -72,17 +72,17 @@ public class MainMenuController extends ViewController {
 
     @FXML
     void agregarCuenta(MouseEvent event) {
-        try {
-            boolean resultado = bizumController.abrirVentanaEmergente(Vistas.VIEW_AGREGAR_CUENTA.getRuta());
-        
-            if (resultado) {
+        try {        
+            if (bizumController.abrirVentanaEmergente(Vistas.VIEW_AGREGAR_CUENTA.getRuta())) {
                 SingleUsuario.setCuentas(null);
                 bizumController.getCuentas(SingleUsuario.getUsuario());
                 textoCuenta.setText("");
                 textoCuenta.setText(textoCuentas());
-            }        } catch (Exception e) {
+            }
+        } catch (Exception e) {
             mostrarAviso("Ha ocurrido un error al abrir la ventana emergente", "Error", AlertType.ERROR);
         }
+
         textoCuenta.setText(textoCuentas());
     }
 
@@ -98,7 +98,19 @@ public class MainMenuController extends ViewController {
 
     @FXML
     void sacarDinero(MouseEvent event) {
-
+        try {
+            boolean resultado = bizumController.abrirVentanaEmergente(Vistas.VIEW_SACAR_DINERO.getRuta());
+        
+            if (resultado) {
+                SingleUsuario.setCuentas(null);
+                bizumController.getCuentas(SingleUsuario.getUsuario());
+                textoCuenta.setText("");
+                textoCuenta.setText(textoCuentas());
+            }        
+        } catch (Exception e) {
+            mostrarAviso("Ha ocurrido un error al abrir la ventana emergente", "Error", AlertType.ERROR);
+        }
+        textoCuenta.setText(textoCuentas());
     }
 
     @FXML
