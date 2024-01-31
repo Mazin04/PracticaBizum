@@ -1,6 +1,8 @@
 package es.rgs.controller;
 
+import java.math.BigInteger;
 import java.sql.SQLException;
+import java.util.List;
 
 import es.rgs.App;
 import es.rgs.model.BancoDAO;
@@ -16,7 +18,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class BizumController extends Application {
     private static final String AVISO_CIERRE2 = "¿Seguro que quieres cerrar el programa?";
@@ -72,6 +76,29 @@ public class BizumController extends Application {
         return viewController;
     }
 
+    public boolean abrirVentanaEmergente(String vista) throws Exception {
+        try {
+            FXMLLoader loader = new FXMLLoader(App.class.getResource(vista));
+            Parent root = (Parent)loader.load();
+    
+            ViewController viewController = loader.<ViewController>getController();
+            viewController.setBizumController(this);
+
+            Stage dialogStage = new Stage();
+            dialogStage.initModality(Modality.APPLICATION_MODAL);
+            dialogStage.initOwner(currentStage);
+            dialogStage.initStyle(StageStyle.UTILITY);
+    
+            Scene scene = new Scene(root);
+            dialogStage.setScene(scene);
+            dialogStage.showAndWait();
+            return viewController.getResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     public boolean iniciarSesion(String usuario, String contraseña) {
         return dao.iniciarSesion(usuario, contraseña);
     }
@@ -86,5 +113,21 @@ public class BizumController extends Application {
 
     public void registrarUsuario(String usuario, String contraseña, String nombre, Integer telefono) {
         dao.registrarUsuario(usuario, contraseña, nombre, telefono);
+    }
+
+    public String getTelefono(String usuario) {
+        return dao.getTelefono(usuario);
+    }
+
+    public void getCuentas(String usuario) {
+        dao.getCuentas(usuario);
+    }
+
+    public void agregarCuenta(String username, BigInteger numCuenta, Double dinero) {
+        dao.agregarCuenta(username, numCuenta, dinero);
+    }
+
+    public boolean comprobarCuenta(BigInteger numCuenta) {
+        return dao.comprobarCuenta(numCuenta);
     }
 }

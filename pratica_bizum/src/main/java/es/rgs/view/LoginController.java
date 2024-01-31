@@ -1,6 +1,7 @@
 package es.rgs.view;
 
 import es.rgs.controller.BizumController;
+import es.rgs.model.entities.SingleUsuario;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -96,6 +97,9 @@ public class LoginController extends ViewController {
             } else {
                 if (bizumController.iniciarSesion(usuario, contraseña)) {
                     String nombre = bizumController.getNombre(usuario);
+                    SingleUsuario.setUsuario(usuario);
+                    SingleUsuario.setTelefono(bizumController.getTelefono(usuario));
+                    bizumController.getCuentas(usuario);
                     mostrarAviso("Bienvenido " + nombre, "Bienvenido", AlertType.INFORMATION);
                     cambiarVentana(Vistas.VIEW_MENU);
                 } else {
@@ -116,6 +120,9 @@ public class LoginController extends ViewController {
                     try {
                         Integer numTelefono = Integer.parseInt(telefono);
                         bizumController.registrarUsuario(usuario, contraseña, nombre, numTelefono);
+                        SingleUsuario.setUsuario(usuario);
+                        SingleUsuario.setTelefono(telefono);
+                        bizumController.getCuentas(usuario);
                         mostrarAviso("Usuario registrado correctamente.", "Registro", AlertType.INFORMATION);
                         cambiarVentana(Vistas.VIEW_MENU);
                     } catch (Exception e) {

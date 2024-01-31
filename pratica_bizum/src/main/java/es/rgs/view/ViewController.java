@@ -10,4 +10,13 @@ public abstract class ViewController {
         this.bizumController = controller;
     }
 
+    private Boolean result;
+
+    public void setResult(Boolean result) {
+        this.result = result;
+    }
+
+    public Boolean getResult() {
+        return result;
+    }
 }

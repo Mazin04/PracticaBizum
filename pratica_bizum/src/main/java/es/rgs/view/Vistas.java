@@ -2,7 +2,8 @@ package es.rgs.view;
 
 public enum Vistas {
         VIEW_LOGIN("view/Login.fxml"), 
-        VIEW_MENU("view/mainMenu.fxml"),;
+        VIEW_MENU("view/mainMenu.fxml"),
+        VIEW_AGREGAR_CUENTA("view/agregarCuenta.fxml"),;
 
         private final String ruta;
 
