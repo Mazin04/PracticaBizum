@@ -2,7 +2,13 @@ package es.rgs.model.entities;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Clase que representa un usuario único en el sistema Bizum.
+ * Almacena información sobre el usuario actual, su teléfono y las cuentas asociadas.
+ *
+ * @author Rubén García
+ * @version 1.0
+ */
 public class SingleUsuario {
     private static String usuarioActual;
     private static String telefonoActual;

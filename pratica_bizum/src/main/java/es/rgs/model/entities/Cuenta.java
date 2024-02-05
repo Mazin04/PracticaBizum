@@ -2,6 +2,13 @@ package es.rgs.model.entities;
 
 import java.math.BigInteger;
 
+/**
+ * Clase que representa una cuenta en el sistema Bizum.
+ * Contiene información sobre el número de cuenta y el saldo disponible.
+ *
+ * @author Rubén García
+ * @version 1.0
+ */
 public class Cuenta {
     private BigInteger numeroCuenta;
     private double dinero;

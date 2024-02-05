@@ -12,6 +12,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+/**
+ * Controlador para la vista del menú principal en la aplicación Bizum.
+ * Permite al usuario realizar diversas operaciones como agregar cuentas, realizar
+ * transferencias de dinero (Bizum), ingresar dinero en una cuenta y sacar dinero de una cuenta.
+ */
 public class MainMenuController extends ViewController {
 
     @FXML
@@ -47,7 +52,10 @@ public class MainMenuController extends ViewController {
     @FXML
     private Label textoTelefono;
 
-
+    /**
+     * Inicializa el controlador.
+     * Llena los label con la información del usuario y sus cuentas.
+     */
     @FXML
     void initialize() {
         textoNombre.setText(SingleUsuario.getUsuario());
@@ -55,15 +63,25 @@ public class MainMenuController extends ViewController {
         textoCuenta.setText(textoCuentas().equals("") ? "No tienes cuentas" : textoCuentas());
     }
 
+    /**
+     * Genera un texto que muestra las cuentas del usuario y sus saldos.
+     * @return Texto con la información de las cuentas del usuario.
+     */
     public String textoCuentas() {
         String texto = "";
         for (int i = 0; i < SingleUsuario.getCuentas().size(); i++) {
-            String numeroCuenta = formatarCuenta(SingleUsuario.getCuentas().get(i).getNumeroCuenta().toString());
+            String numeroCuenta = formatearCuenta(SingleUsuario.getCuentas().get(i).getNumeroCuenta().toString());
             texto += numeroCuenta + " --> " + SingleUsuario.getCuentas().get(i).getDinero()+ "€\n";
         }
         return texto;
     }
 
+    /**
+     * Método invocado al hacer clic en el botón "Agregar Cuenta".
+     * Abre una ventana emergente para agregar una nueva cuenta.
+     * Actualiza la lista de cuentas del usuario en caso de éxito.
+     * @param event Evento de clic del mouse.
+     */
     @FXML
     void agregarCuenta(MouseEvent event) {
         try {        
@@ -80,6 +98,12 @@ public class MainMenuController extends ViewController {
         textoCuenta.setText(textoCuentas());
     }
 
+    /**
+     * Método invocado al hacer clic en el botón "Bizum".
+     * Abre una ventana emergente para realizar una transferencia de dinero (Bizum).
+     * Actualiza la lista de cuentas del usuario en caso de éxito.
+     * @param event Evento de clic del mouse.
+     */
     @FXML
     void hacerBizum(MouseEvent event) {
         try {
@@ -96,7 +120,12 @@ public class MainMenuController extends ViewController {
         }
         textoCuenta.setText(textoCuentas());
     }
-
+    /**
+     * Método invocado al hacer clic en el botón "Ingresar Dinero".
+     * Abre una ventana emergente para ingresar dinero en una cuenta.
+     * Actualiza la lista de cuentas del usuario en caso de éxito.
+     * @param event Evento de clic del mouse.
+     */
     @FXML
     void ingresarDinero(MouseEvent event) {
         try {
@@ -114,6 +143,12 @@ public class MainMenuController extends ViewController {
         textoCuenta.setText(textoCuentas());
     }
 
+    /**
+     * Método invocado al hacer clic en el botón "Sacar Dinero".
+     * Abre una ventana emergente para sacar dinero de una cuenta.
+     * Actualiza la lista de cuentas del usuario en caso de éxito.
+     * @param event Evento de clic del mouse.
+     */
     @FXML
     void sacarDinero(MouseEvent event) {
         try {
@@ -131,6 +166,11 @@ public class MainMenuController extends ViewController {
         textoCuenta.setText(textoCuentas());
     }
 
+    /**
+     * Método invocado al hacer clic en el botón "Cerrar Sesión".
+     * Cierra la sesión actual del usuario.
+     * @param event Evento de clic del mouse.
+     */
     @FXML
     void cerrarSesion(MouseEvent event) {
         Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -152,6 +192,13 @@ public class MainMenuController extends ViewController {
         }
     }
 
+    /**
+     * Método para mostrar un aviso utilizando un cuadro de diálogo.
+     * 
+     * @param msgTexto Mensaje a mostrar en el aviso.
+     * @param titulo Título del cuadro de diálogo.
+     * @param tipo Tipo de aviso (INFORMATION, ERROR, etc.).
+     */
     public void mostrarAviso(String msgTexto, String titulo, AlertType tipo) {
         Alert alerta = new Alert(tipo);
         alerta.setHeaderText(null);
@@ -169,16 +216,15 @@ public class MainMenuController extends ViewController {
 
         alerta.showAndWait();
     }
-
-    private void cambiarVentana(Vistas vista) {
-        try {
-            bizumController.cargarVista(vista.getRuta());
-        } catch (Exception e) {
-            mostrarAviso("Ha ocurrido un error cambiando de ventana.", "Error", Alert.AlertType.ERROR);
-        }
-    }
-
-    private static String formatarCuenta(String numeroCuenta) {
+    
+    /**
+     * Formatea el número de cuenta para mostrarlo de forma legible.
+     * Agrega espacios cada cuatro dígitos para mejorar la legibilidad.
+     * 
+     * @param numeroCuenta El número de cuenta a formatear.
+     * @return El número de cuenta formateado.
+     */
+    private static String formatearCuenta(String numeroCuenta) {
         StringBuilder formatoCuenta = new StringBuilder();
 
         for (int i = 0; i < numeroCuenta.length(); i++) {

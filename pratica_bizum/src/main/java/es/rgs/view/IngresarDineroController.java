@@ -17,6 +17,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+/**
+ * Controlador para la vista de ingreso de dinero en una cuenta.
+ * Maneja la lógica y la interacción con la interfaz de usuario relacionada con el ingreso de dinero.
+ * Extiende de la clase ViewController.
+ * 
+ * @author Rubén García
+ * @version 1.0
+ */
 public class IngresarDineroController extends ViewController {
 
     @FXML
@@ -27,7 +35,11 @@ public class IngresarDineroController extends ViewController {
 
     @FXML
     private TextField txfDinero;
-
+    
+    /**
+     * Método de inicialización que se ejecuta después de cargar la interfaz de usuario.
+     * Carga las cuentas asociadas al usuario y realiza configuraciones iniciales.
+     */
     @FXML
     void initialize() {
         mbCuenta.getItems().clear();
@@ -41,6 +53,11 @@ public class IngresarDineroController extends ViewController {
         }
     }
 
+    /**
+     * Método para manejar el evento de ingresar dinero en una cuenta.
+     * 
+     * @param event Evento de clic del ratón.
+     */
     @FXML
     void sacarDinero(MouseEvent event) {
         try {
@@ -56,11 +73,14 @@ public class IngresarDineroController extends ViewController {
                 mostrarAviso("El dinero debe ser positivo", "Error dinero", Alert.AlertType.ERROR);
                 setResult(false);
             } else {
+                // Obtener el dinero a ingresar
                 Double dinero = Double.valueOf(txfDinero.getText());
+                // Ingresar dinero en la cuenta
                 bizumController.ingresarDinero(mbCuenta.getText(), dinero);
                 txfDinero.setText("");
+                // Mostrar aviso de ingreso correcto
                 mostrarAviso("Se ha ingresado correctamente el dinero", "Ingresar dinero", Alert.AlertType.INFORMATION);
-                
+                // Cerrar la ventana
                 Stage stage = (Stage) btnIngresar.getScene().getWindow();
                 stage.close();
                 setResult(true);
@@ -70,7 +90,13 @@ public class IngresarDineroController extends ViewController {
             setResult(false);
         }
     }
-
+    /**
+     * Método para mostrar un aviso utilizando un cuadro de diálogo.
+     * 
+     * @param msgTexto Mensaje a mostrar en el aviso.
+     * @param titulo Título del cuadro de diálogo.
+     * @param tipo Tipo de aviso (INFORMATION, ERROR, etc.).
+     */
     public void mostrarAviso(String msgTexto, String titulo, AlertType tipo) {
         Alert alerta = new Alert(tipo);
         alerta.setHeaderText(null);

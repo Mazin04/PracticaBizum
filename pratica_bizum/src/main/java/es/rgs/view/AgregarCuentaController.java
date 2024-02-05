@@ -14,6 +14,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+/**
+ * Controlador para la vista de agregar cuenta.
+ * Maneja la lógica y la interacción con la interfaz de usuario relacionada con la creación de cuentas.
+ * Extiende de la clase ViewController.
+ * 
+ * @author Rubén García
+ * @version 1.0
+ */
 public class AgregarCuentaController extends ViewController {
 
     @FXML
@@ -25,9 +33,15 @@ public class AgregarCuentaController extends ViewController {
     @FXML
     private TextField txfNumeroCuenta;
 
+    /**
+     * Método para manejar el evento de agregar una nueva cuenta.
+     * 
+     * @param event Evento de clic del ratón.
+     */
     @FXML
     void agregarCuenta(MouseEvent event) {
         try {
+            // Validaciones para los campos de entrada
             if (txfNumeroCuenta.getText().isEmpty() || txfDinero.getText().isEmpty()) {
                 mostrarAviso("Deben rellenarse todos los campos", "Error", AlertType.ERROR);
                 setResult(false);
@@ -41,28 +55,39 @@ public class AgregarCuentaController extends ViewController {
                 mostrarAviso("El dinero debe ser positivo", "Error dinero", AlertType.ERROR);
                 setResult(false);
             } else {
+                // Obtener datos de los campos de entrada
                 BigInteger numCuenta = new BigInteger(txfNumeroCuenta.getText());
                 Double dinero = Double.valueOf(txfDinero.getText());
+                // Validar si el número de cuenta ya existe
                 if (bizumController.comprobarCuenta(numCuenta)) {
                     mostrarAviso("El número de cuenta ya existe", "Error", AlertType.ERROR);
                     setResult(false);
                 } else {
+                    // Agregar la cuenta y mostrar mensaje de éxito
                     bizumController.agregarCuenta(SingleUsuario.getUsuario(), numCuenta, dinero);
                     txfDinero.setText("");
                     txfNumeroCuenta.setText("");
                     mostrarAviso("Se ha creado correctamente su cuenta", "Creación de cuenta", AlertType.INFORMATION);
-    
+                    // Cerrar la ventana actual
                     Stage stage = (Stage) btnAgregar.getScene().getWindow();
                     stage.close();
                     setResult(true);
                 }
             }
         } catch (Exception e) {
+            // Manejar excepciones relacionadas con valores numéricos
             e.printStackTrace();
             mostrarAviso("Deben introducirse valores numéricos", "Error", AlertType.ERROR);
         }
     }
-
+    
+    /**
+     * Método para mostrar un aviso utilizando un cuadro de diálogo.
+     * 
+     * @param msgTexto Mensaje a mostrar en el aviso.
+     * @param titulo Título del cuadro de diálogo.
+     * @param tipo Tipo de aviso (INFORMATION, ERROR, etc.).
+     */
     public void mostrarAviso(String msgTexto, String titulo, AlertType tipo) {
         Alert alerta = new Alert(tipo);
         alerta.setHeaderText(null);

@@ -16,7 +16,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
+/**
+ * Controlador para la vista de sacar dinero en la aplicación Bizum.
+ * Permite al usuario sacar dinero de una de sus cuentas.
+ */
 public class SacarDineroController extends ViewController{
     @FXML
     private Button btnSacar;
@@ -27,6 +30,10 @@ public class SacarDineroController extends ViewController{
     @FXML
     private TextField txfDinero;
 
+    /**
+     * Inicializa el controlador.
+     * Llena el menú desplegable con las cuentas disponibles del usuario.
+     */
     @FXML
     void initialize() {
         mbCuenta.getItems().clear();
@@ -39,7 +46,10 @@ public class SacarDineroController extends ViewController{
             mbCuenta.getItems().add(menuItem);
         }
     }
-
+    /**
+     * Maneja el evento de sacar dinero.
+     * Extrae la cantidad especificada de dinero de la cuenta seleccionada.
+     */
     @FXML
     void sacarDinero(MouseEvent event) {
         try {
@@ -72,6 +82,13 @@ public class SacarDineroController extends ViewController{
         }
     }
 
+    /**
+     * Método para mostrar un aviso utilizando un cuadro de diálogo.
+     * 
+     * @param msgTexto Mensaje a mostrar en el aviso.
+     * @param titulo Título del cuadro de diálogo.
+     * @param tipo Tipo de aviso (INFORMATION, ERROR, etc.).
+     */
     public void mostrarAviso(String msgTexto, String titulo, AlertType tipo) {
         Alert alerta = new Alert(tipo);
         alerta.setHeaderText(null);

@@ -17,6 +17,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+/**
+ * Controlador para la vista de inicio de sesión y registro.
+ * Maneja la lógica y la interacción con la interfaz de usuario relacionada con el inicio de sesión y registro.
+ * Extiende de la clase ViewController.
+ * 
+ * @author Rubén García
+ * @version 1.0
+ */
 public class LoginController extends ViewController {
     private boolean modoInicioSesion = true;
 
@@ -53,11 +61,16 @@ public class LoginController extends ViewController {
     @FXML
     private TextField txfUsuario;
 
-    @FXML
+    /**
+     * Método de inicialización que se ejecuta después de cargar la interfaz de usuario
+     */
+     @FXML
     void initialize() {
+        // Añadir un listener para detectar cambios en el campo de contraseña
         txfContraseña.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                // Si el botón de mostrar contraseña está seleccionado, deseleccionarlo
                 if (toggleContraseña.isSelected()) {
                     toggleContraseña.setSelected(false);
                 }
@@ -65,27 +78,42 @@ public class LoginController extends ViewController {
         });
     }
 
-    @FXML
+    /**
+     * Método para mostrar u ocultar la contraseña según el estado del botón de alternar contraseña
+    */
+     @FXML
     void mostrarContraseña(MouseEvent event) {
         if (toggleContraseña.isSelected()) {
+            // Mostrar la contraseña y limpiar el campo de texto
             txfContraseña.setPromptText(txfContraseña.getText());
             txfContraseña.setText("");
         } else {
+            // Ocultar la contraseña y restaurar el valor original
             txfContraseña.setText(txfContraseña.getPromptText());
         }
     }
 
+    /**
+     * Método para cambiar entre el modo de inicio de sesión y el modo de registro
+     */
     @FXML
     void cambiarRegistro(MouseEvent event) {
+        // Alternar entre inicio de sesión y registro
         modoInicioSesion = !modoInicioSesion;
+        // Mostrar u ocultar elementos según el modo
         lblNombre.setVisible(!modoInicioSesion);
         lblTelefono.setVisible(!modoInicioSesion);
         txfNombre.setVisible(!modoInicioSesion);
         txfTelefono.setVisible(!modoInicioSesion);
+    
+        // Actualizar el texto del botón y la etiqueta
         btnInicioSesion.setText(modoInicioSesion ? "Iniciar sesión" : "Registrarse");
         lblRegistrate.setText(modoInicioSesion ? "¿No tienes cuenta? Regístrate" : "¿Ya tienes cuenta? Inicia sesión");
     }
-
+    /**
+     * Método para manejar el evento de inicio de sesión o registro
+     * @param event
+     */
     @FXML
     void iniciarSesion(MouseEvent event) {
         if (modoInicioSesion) {
@@ -138,6 +166,13 @@ public class LoginController extends ViewController {
         }
     }
 
+    /**
+     * Método para mostrar un aviso utilizando un cuadro de diálogo.
+     * 
+     * @param msgTexto Mensaje a mostrar en el aviso.
+     * @param titulo Título del cuadro de diálogo.
+     * @param tipo Tipo de aviso (INFORMATION, ERROR, etc.).
+     */
     public void mostrarAviso(String msgTexto, String titulo, AlertType tipo) {
         Alert alerta = new Alert(tipo);
         alerta.setHeaderText(null);

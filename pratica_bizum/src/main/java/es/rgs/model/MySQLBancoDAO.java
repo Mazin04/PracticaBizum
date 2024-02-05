@@ -12,9 +12,22 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 import es.rgs.model.entities.Cuenta;
 import es.rgs.model.entities.SingleUsuario;
 
+/**
+ * Clase que implementa la interfaz BancoDAO para la conexión y operaciones con una base de datos MySQL.
+ * Utiliza JDBC para la conexión y manipulación de datos.
+ *  
+ * @author Rubén García
+ * @version 1.0
+ */
 public class MySQLBancoDAO implements BancoDAO {
+    
     private static Connection conn;
 
+    /**
+     * Método para establecer la conexión a la base de datos MySQL.
+     * 
+     * @return Conexión a la base de datos, o null si hay un error.
+     */
     private static Connection conectar() {
         try {
             String url = "jdbc:mysql://sql8.freemysqlhosting.net:3306/sql8679344";
@@ -79,6 +92,12 @@ public class MySQLBancoDAO implements BancoDAO {
         return null;
     }
 
+    /**
+     * Método para encriptar una contraseña utilizando el algoritmo bcrypt.
+     * 
+     * @param contraseña Contraseña a ser encriptada.
+     * @return Cadena encriptada utilizando bcrypt.
+     */
     public String encriptar(String contraseña) {
         String bcryptHashString = BCrypt.withDefaults().hashToString(12, contraseña.toCharArray());
         return bcryptHashString;
