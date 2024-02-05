@@ -78,6 +78,10 @@ public class HacerBizumController extends ViewController{
             } else if (Double.valueOf(txfDinero.getText()) < 0){
                 mostrarAviso("El dinero debe ser positivo", "Error dinero", AlertType.ERROR);
                 setResult(false);
+            } else if(txfTelefono.getText().equals(SingleUsuario.getTelefono())){
+                mostrarAviso("No se puede hacer un bizum a sí mismo", "Aviso", AlertType.WARNING);
+            } else if (Double.valueOf(txfDinero.getText()) > bizumController.getDinero(mbNCuenta.getText())){
+                mostrarAviso("No se puede hacer una transferencia de una cantidad mayor a la que se tiene", "Aviso, dinero", AlertType.WARNING);
             } else {
                 Double dinero = Double.valueOf(txfDinero.getText());
                 String telefono = txfTelefono.getText();
