@@ -69,5 +69,41 @@ public class TestDAO implements BancoDAO {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'ingresarDinero'");
     }
+
+    @Override
+    public boolean comprobarTelefono(String telefono) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'comprobarTelefono'");
+    }
+
+    @Override
+    public String getCuentaTelefono(String telefono) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getCuentaTelefono'");
+    }
+
+    @Override
+    public boolean comprobarTelefonoExiste(String telefono) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'comprobarTelefonoExiste'");
+    }
+
+    @Override
+    public boolean comprobarRegistroTelefono(String telefono) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'comprobarRegistroTelefono'");
+    }
+
+    @Override
+    public void hacerBizum(String telefono, Double dinero) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'hacerBizum'");
+    }
+
+    @Override
+    public void registrarBizumUsuario(String numeroCuenta) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'registrarBizumUsuario'");
+    }
     
 }

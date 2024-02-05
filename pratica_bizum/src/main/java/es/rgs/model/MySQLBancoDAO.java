@@ -136,6 +136,33 @@ public class MySQLBancoDAO implements BancoDAO {
     }
 
     @Override
+    public boolean comprobarRegistroTelefono(String telefono) {
+        conn = conectar();
+        try {
+            String sql = "SELECT TELEFONO FROM USUARIO WHERE TELEFONO = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, telefono);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.getSQLState();
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.getSQLState();
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    @Override
     public String getTelefono(String usuario) {
         conn = conectar();
         try {
@@ -293,6 +320,139 @@ public class MySQLBancoDAO implements BancoDAO {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setDouble(1, dinero);
             ps.setBigDecimal(2, new BigDecimal(numeroCuenta));
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.getSQLState();
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.getSQLState();
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public boolean comprobarTelefono(String telefono) {
+        conn = conectar();
+        try {
+            String sql = "SELECT * FROM BIZUM WHERE TELEFONO = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, telefono);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.getSQLState();
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.getSQLState();
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public String getCuentaTelefono(String telefono) {
+        conn = conectar();
+        try {
+            String sql = "SELECT N_CUENTA FROM BIZUM WHERE TELEFONO = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, telefono);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getString(1);
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            e.getSQLState();
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.getSQLState();
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public boolean comprobarTelefonoExiste(String telefono) {
+        conn = conectar();
+        try {
+            String sql = "SELECT * FROM BIZUM WHERE TELEFONO = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, telefono);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.getSQLState();
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.getSQLState();
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void hacerBizum(String telefono, Double dinero) {
+        conn = conectar();
+        try {
+            String sql = "UPDATE CUENTAS SET DINERO = DINERO - ? WHERE N_CUENTA = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setDouble(1, dinero);
+            ps.setBigDecimal(2, new BigDecimal(getCuentaTelefono(SingleUsuario.getTelefono())));
+            ps.executeUpdate();
+            conn.close();
+            conn = conectar();
+            sql = "UPDATE CUENTAS SET DINERO = DINERO + ? WHERE N_CUENTA = ?";
+            PreparedStatement ps2 = conn.prepareStatement(sql);
+            ps2.setDouble(1, dinero);
+            ps2.setBigDecimal(2, new BigDecimal(getCuentaTelefono(telefono)));
+            ps2.executeUpdate();
+        } catch (SQLException e) {
+            e.getSQLState();
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.getSQLState();
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void registrarBizumUsuario(String numeroCuenta) {
+        conn = conectar();
+        try {
+            String sql = "INSERT INTO BIZUM VALUES (?, ?, ?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, SingleUsuario.getUsuario());
+            ps.setBigDecimal(2, new BigDecimal(numeroCuenta));
+            ps.setString(3, SingleUsuario.getTelefono());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.getSQLState();

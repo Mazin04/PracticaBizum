@@ -113,9 +113,13 @@ public class LoginController extends ViewController {
             String telefono = txfTelefono.getText();
             if (usuario.isEmpty() || contraseña.isEmpty() || nombre.isEmpty() || telefono.isEmpty()) {
                 mostrarAviso("Debes rellenar todos los campos.", "Error", AlertType.ERROR);
+            } else if (telefono.length() != 9) {
+                mostrarAviso("El teléfono debe tener 9 dígitos.", "Error", AlertType.ERROR);
             } else {
                 if (bizumController.comprobarUsuario(usuario)) {
                     mostrarAviso("Ya existe un usuario con ese nombre.", "Error", AlertType.ERROR);
+                } else if (bizumController.comprobarRegistroTelefono(telefono)) {
+                    mostrarAviso("Ya existe un usuario con ese teléfono.", "Error", AlertType.ERROR);
                 } else {
                     try {
                         Integer numTelefono = Integer.parseInt(telefono);

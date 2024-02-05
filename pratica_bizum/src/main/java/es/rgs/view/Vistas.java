@@ -5,7 +5,8 @@ public enum Vistas {
         VIEW_MENU("view/mainMenu.fxml"),
         VIEW_AGREGAR_CUENTA("view/agregarCuenta.fxml"), 
         VIEW_SACAR_DINERO("view/sacarDinero.fxml"), 
-        VIEW_INGRESAR_DINERO("view/ingresarDinero.fxml"),;
+        VIEW_INGRESAR_DINERO("view/ingresarDinero.fxml"), 
+        VIEW_BIZUM("view/hacerBizum.fxml"),;
 
         private final String ruta;
 

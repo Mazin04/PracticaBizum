@@ -88,7 +88,19 @@ public class MainMenuController extends ViewController {
 
     @FXML
     void hacerBizum(MouseEvent event) {
-
+        try {
+            boolean resultado = bizumController.abrirVentanaEmergente(Vistas.VIEW_BIZUM.getRuta());
+        
+            if (resultado) {
+                SingleUsuario.setCuentas(null);
+                bizumController.getCuentas(SingleUsuario.getUsuario());
+                textoCuenta.setText("");
+                textoCuenta.setText(textoCuentas());
+            }        
+        } catch (Exception e) {
+            mostrarAviso("Ha ocurrido un error al abrir la ventana emergente", "Error", AlertType.ERROR);
+        }
+        textoCuenta.setText(textoCuentas());
     }
 
     @FXML

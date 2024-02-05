@@ -13,5 +13,11 @@ public interface BancoDAO {
     public boolean comprobarCuenta(BigInteger numCuenta);
     public Double getDinero(String numeroCuenta);
     public void sacarDinero(String numCuenta, Double dinero);
-    public void ingresarDinero(String numeroCuenta, Double dinero);   
+    public void ingresarDinero(String numeroCuenta, Double dinero);
+    public boolean comprobarTelefono(String telefono);
+    public String getCuentaTelefono(String telefono);
+    public boolean comprobarTelefonoExiste(String telefono);
+    public boolean comprobarRegistroTelefono(String telefono);
+    public void hacerBizum(String telefono, Double dinero);
+    public void registrarBizumUsuario(String numeroCuenta);   
 }

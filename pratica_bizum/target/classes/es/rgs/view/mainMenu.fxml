@@ -73,7 +73,7 @@
             <Font name="Leelawadee UI" size="18.0" />
          </font>
       </Label>
-      <VBox alignment="CENTER" layoutX="374.0" layoutY="57.0" prefHeight="686.0" prefWidth="532.0" spacing="33.0">
+      <VBox alignment="CENTER" layoutX="529.0" layoutY="57.0" prefHeight="686.0" prefWidth="532.0" spacing="33.0">
          <children>
             <Button fx:id="btnAgregarCuenta" mnemonicParsing="false" onMouseClicked="#agregarCuenta" prefHeight="138.0" prefWidth="373.0" text="Agregar Cuenta" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS">
                <font>

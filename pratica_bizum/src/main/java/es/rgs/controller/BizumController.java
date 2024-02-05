@@ -111,6 +111,10 @@ public class BizumController extends Application {
         return dao.comprobarUsuario(usuario);
     }
 
+    public boolean comprobarRegistroTelefono(String telefono) {
+        return dao.comprobarRegistroTelefono(telefono);
+    }
+
     public void registrarUsuario(String usuario, String contraseña, String nombre, Integer telefono) {
         dao.registrarUsuario(usuario, contraseña, nombre, telefono);
     }
@@ -141,5 +145,25 @@ public class BizumController extends Application {
 
     public void ingresarDinero(String numeroCuenta, Double dinero) {
         dao.ingresarDinero(numeroCuenta, dinero);
+    }
+
+    public boolean comprobarTelefono(String telefono) {
+        return dao.comprobarTelefono(telefono);
+    }
+
+    public String getCuentaTelefono(String telefono) {
+        return dao.getCuentaTelefono(telefono);
+    }
+
+    public boolean comprobarTelefonoExiste(String telefono) {
+        return dao.comprobarTelefonoExiste(telefono);
+    }
+
+    public void hacerBizum(String telefono, Double dinero) {
+        dao.hacerBizum(telefono, dinero);
+    }
+
+    public void registrarBizumUsuario(String numeroCuenta) {
+        dao.registrarBizumUsuario(numeroCuenta);
     }
 }
