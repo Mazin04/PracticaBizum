@@ -2,8 +2,6 @@ package es.rgs.controller;
 
 import java.math.BigInteger;
 import java.sql.SQLException;
-import java.util.List;
-
 import es.rgs.App;
 import es.rgs.model.BancoDAO;
 import es.rgs.model.DAOFactory;

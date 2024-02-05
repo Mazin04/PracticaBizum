@@ -1,9 +1,5 @@
 package es.rgs.view;
 
-import java.sql.SQLException;
-import java.util.List;
-import java.util.ResourceBundle;
-
 import es.rgs.controller.BizumController;
 import es.rgs.model.entities.Cuenta;
 import es.rgs.model.entities.SingleUsuario;

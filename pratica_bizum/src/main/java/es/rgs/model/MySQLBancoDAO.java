@@ -433,6 +433,7 @@ public class MySQLBancoDAO implements BancoDAO {
             ps2.executeUpdate();
         } catch (SQLException e) {
             e.getSQLState();
+            e.getMessage();
             e.printStackTrace();
         } finally {
             try {
