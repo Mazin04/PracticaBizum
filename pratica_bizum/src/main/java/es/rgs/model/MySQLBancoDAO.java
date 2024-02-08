@@ -9,8 +9,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
+import es.rgs.controller.BizumController;
 import es.rgs.model.entities.Cuenta;
 import es.rgs.model.entities.SingleUsuario;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 /**
  * Clase que implementa la interfaz BancoDAO para la conexión y operaciones con una base de datos MySQL.
@@ -30,12 +36,13 @@ public class MySQLBancoDAO implements BancoDAO {
      */
     private static Connection conectar() {
         try {
-            String url = "jdbc:mysql://sql8.freemysqlhosting.net:3306/sql8679344";
-            String usuario = "sql8679344";
-            String contraseña = "yGgzwittje";
+            String url = "jdbc:mysql://sql.freedb.tech:3306/freedb_bizumRuben";
+            String usuario = "freedb_rubengs";
+            String contraseña = "DQMNrP2PG6!cN@t";
             Connection conn = DriverManager.getConnection(url, usuario, contraseña);
             return conn;
         } catch (SQLException e) {
+            System.out.println("Hay un error en la conexión a la base de datos.");
             return null;
         }
     }
@@ -56,6 +63,8 @@ public class MySQLBancoDAO implements BancoDAO {
         } catch (SQLException e) {
             e.getSQLState();
             e.printStackTrace();
+        } catch (NullPointerException e){
+            mostrarAviso("La base de datos está caída", "Error", AlertType.ERROR);
         } finally {
             try {
                 conn.close();
@@ -485,5 +494,30 @@ public class MySQLBancoDAO implements BancoDAO {
                 e.printStackTrace();
             }
         }
+    }
+
+        /**
+     * Método para mostrar un aviso utilizando un cuadro de diálogo.
+     * 
+     * @param msgTexto Mensaje a mostrar en el aviso.
+     * @param titulo Título del cuadro de diálogo.
+     * @param tipo Tipo de aviso (INFORMATION, ERROR, etc.).
+     */
+    public void mostrarAviso(String msgTexto, String titulo, AlertType tipo) {
+        Alert alerta = new Alert(tipo);
+        alerta.setHeaderText(null);
+        alerta.setTitle(titulo);
+        alerta.setContentText(msgTexto);
+
+        ImageView imageView = new ImageView(new Image(BizumController.LOGO));
+        imageView.setFitWidth(100);
+        imageView.setFitHeight(100);
+
+        alerta.setGraphic(imageView);
+
+        Stage stage = (Stage) alerta.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image(BizumController.LOGO));
+
+        alerta.showAndWait();
     }
 }
